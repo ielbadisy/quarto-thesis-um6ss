@@ -1,0 +1,68 @@
+# Chapter 2: Methodology and analysis {#sec-Chapter2}
+
+## Study design
+
+This chapter should describe the design in a way that another researcher could reproduce.
+
+### Include the following
+
+- Study type and justification.
+- Setting, inclusion criteria, and sampling strategy.
+- Data sources and collection tools.
+- Ethical approval and confidentiality safeguards.
+
+## Data workflow
+
+The easiest way to keep a thesis readable is to document the workflow in the same order the work was done.
+
+1. Define the cohort or sample.
+2. Clean and validate the dataset, handling missing data with an
+   appropriate method such as multiple imputation [@Sterne2009].
+3. Generate descriptive statistics.
+4. Fit the primary model or compare groups, following standard regression
+   modeling practice [@Vittinghoff2012].
+5. Report the results with confidence intervals or effect sizes.
+
+## Example formula block
+
+The thesis template still supports equations when you need them:
+
+$$
+\hat{\theta} = \arg\min_{\theta} \sum_{i=1}^{n} \ell(y_i, f(x_i; \theta))
+$$
+
+## Example results
+
+The code below lives in `R/shared-results.R` and is sourced verbatim by both this chapter and `slides.qmd`, so the thesis and the defense deck always display the same figure and table. Replace the placeholder data and functions with your own analysis once real results are available.
+
+```{r}
+#| label: setup-shared-results
+source("../R/shared-results.R")
+```
+
+```{r}
+#| label: fig-example-results
+#| fig-cap: "Example primary outcome by study group."
+example_plot()
+```
+
+@fig-example-results shows a placeholder comparison between two groups.
+
+```{r}
+#| label: tbl-example-results
+#| tbl-cap: "Example summary statistics by study group."
+knitr::kable(example_table())
+```
+
+@tbl-example-results reports the corresponding summary statistics.
+
+## Reporting style
+
+Write the methods chapter with enough detail for reproducibility, but do not overload it with implementation noise. Tables and figures are most useful when they summarize the study population, the variable definitions, or the analysis pipeline.
+
+## Ready-to-defend checklist
+
+- Are all variables defined?
+- Is the analysis aligned with the primary objective?
+- Are the limitations acknowledged?
+- Can the same workflow be turned into a defense slide?

@@ -1,0 +1,183 @@
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+\title{$title$}
+\renewcommand{\ttitle}{$title$}
+\renewcommand{\authorname}{$author.name$}
+\renewcommand{\supname}{$thesis.supervisor.name$}
+\renewcommand{\degreename}{$thesis.degree-name$}
+\renewcommand{\univname}{$thesis.university$}
+\renewcommand{\deptname}{$thesis.department$}
+\renewcommand{\groupname}{$thesis.group$}
+\renewcommand{\facname}{$thesis.faculty$}
+\renewcommand{\keywordnames}{UM6SS thesis template}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\vspace*{0.8cm}
+{\Large\bfseries\color{UM6SSDarkRed} \univname\par}
+\vspace{0.35cm}
+{\large Université Mohammed VI des Sciences et de la Santé\par}
+\vspace{0.75cm}
+{\large\scshape UM6SS Thesis Template\par}
+
+\vspace{0.8cm}
+\color{UM6SSRed}\HRule\color{black}\\[0.8cm]
+{\Huge\bfseries \ttitle\par}
+\vspace{0.4cm}
+$if(book.subtitle)$
+\textit{\large $book.subtitle$}\par
+$endif$
+\vspace{0.8cm}
+\color{UM6SSRed}\HRule\color{black}
+
+\vspace{1.2cm}
+
+\begin{tabular}{@{}p{0.30\textwidth}p{0.56\textwidth}@{}}
+\textbf{Author} & $if(author.url)$\href{$author.url$}{\authorname}$else$\authorname$endif$ \\
+\textbf{Supervisor} & $if(thesis.supervisor.url)$\href{$thesis.supervisor.url$}{\supname}$else$\supname$endif$ \\
+\textbf{Degree} & \degreename \\
+\textbf{Department} & \deptname \\
+\textbf{Research group} & \groupname \\
+\end{tabular}
+
+\vfill
+
+$if(thesis.logo)$
+\includegraphics[height=$if(thesis.logo-height)$$thesis.logo-height$$else$2.5cm$endif$]{$thesis.logo$}
+\vspace{0.8cm}
+$endif$
+
+\large \textit{A thesis submitted in fulfillment of the requirements for the degree of \degreename}\\[0.3cm]
+$if(book.date)$
+\large $book.date$
+$endif$
+
+\end{center}
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%----------------------------------------------------------------------------------------
+$if(thesis.declaration)$
+\begin{declaration}
+\addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+$if(thesis.declaration.text)$
+$thesis.declaration.text$
+$else$
+\input{"$thesis.declaration$"}
+$endif$
+
+\end{declaration}
+
+\cleardoublepage
+$endif$
+
+$if(thesis.quotation)$
+%----------------------------------------------------------------------------------------
+%	QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+
+\vspace*{0.2\textheight}
+
+$if(thesis.quotation.text)$
+\noindent``{\itshape $thesis.quotation.text$}''\bigbreak
+
+\hfill $thesis.quotation.attribution$
+$else$
+\input{``$thesis.quotation$''}
+$endif$
+
+$endif$
+
+$if(abstract)$
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+$abstract$
+\end{abstract}
+
+$endif$
+
+$if(thesis.acknowledgements)$
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+$if(thesis.acknowledgements.text)$
+$thesis.acknowledgements.text$
+$else$
+\input{"$thesis.acknowledgements$"}
+$endif$
+\end{acknowledgements}
+
+$endif$
+
+% $--	LIST OF CONTENTS/FIGURES/TABLES PAGES
+
+\begingroup
+\hypersetup{linkcolor=$if(toclinkcolor)$$toclinkcolor$$else$black$endif$}
+
+\tableofcontents % Prints the main table of contents
+
+\listoffigures % Prints the list of figures
+
+\listoftables % Prints the list of tables
+
+\endgroup
+
+
+$if(thesis.abbreviations)$
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+
+\input{"$thesis.abbreviations$"}
+
+$endif$
+
+$if(thesis.constants)$
+%----------------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+\input{"$thesis.constants$"}
+
+$endif$
+
+$if(thesis.symbols)$
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+
+\input{"$thesis.symbols$"}
+
+$endif$
+
+$if(thesis.dedication)$
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+\dedicatory{\input{"$thesis.dedication$"}} 
+
+$endif$
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style

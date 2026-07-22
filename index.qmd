@@ -1,0 +1,30 @@
+---
+title: "Opening Chapter"
+subtitle: "Using the UM6SS thesis template"
+---
+
+# Why this template matters
+
+The Université Mohammed VI des Sciences et de la Santé uses a strong visual identity and a research-intensive academic structure. This template keeps the thesis format familiar, but removes the generic demo content so you can start from a document that already feels like UM6SS.
+
+## What you customize first
+
+- Replace `Your Name` and `Supervisor Name` in `_quarto.yml`.
+- Update the department, faculty, and research unit to match your school.
+- Swap the sample abstract with your actual thesis abstract.
+- Keep the logo file in `images/logo.png` or replace it with the official campus or school mark.
+
+## What the template already does
+
+- Builds a thesis PDF with the UM6SS logo and title page.
+- Keeps the front matter, declaration, acknowledgements, abbreviations, symbols, and appendices.
+- Shares the same red accent color with the slides deck.
+
+## Suggested thesis flow
+
+1. State the clinical or scientific problem.
+2. Explain the UM6SS context and your research gap.
+3. Describe the methodology, ethics, and analysis plan.
+4. Present results, discussion, and implications.
+
+The next chapters provide a compact example of that structure.

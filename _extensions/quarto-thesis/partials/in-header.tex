@@ -1,0 +1,46 @@
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+%\usepackage[T1]{fontenc} % Output font encoding for international characters; causes problems for xelatex
+
+%\usepackage{mathpazo} % Use the Palatino font by default
+
+\usepackage{xcolor}
+\definecolor{UM6SSRed}{HTML}{DA2025}
+\definecolor{UM6SSDarkRed}{HTML}{A41D21}
+\definecolor{UM6SSSoftRed}{HTML}{F7E6E7}
+
+\providecommand{\ttitle}{UM6SS Thesis Template}
+\providecommand{\authorname}{}
+\providecommand{\supname}{}
+\providecommand{\degreename}{}
+\providecommand{\univname}{}
+\providecommand{\deptname}{}
+\providecommand{\groupname}{}
+\providecommand{\facname}{}
+\providecommand{\keywordnames}{UM6SS thesis template}
+
+\DeclareDocumentCommand{\author}{m}{\renewcommand{\authorname}{#1}\renewcommand{\@author}{#1}}
+
+\usepackage[backend=bibtex, style=authoryear, natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+
+
+
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+
+\geometry{
+	headheight=4ex,
+	includehead,
+	includefoot
+}
+
+\raggedbottom
+
+\AtBeginDocument{
+\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+\hypersetup{pdfsubject={UM6SS thesis template}} % Add a useful PDF subject
+\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+}

@@ -1,0 +1,58 @@
+project:
+  type: book
+  output-dir: .
+
+book:
+  title: UM6SS Thesis Template
+  subtitle: Personalized Quarto thesis and slides starter
+  date: July 21, 2026
+  author:
+    name: Your Name
+    url: https://um6ss.ma/
+  downloads: [pdf]
+  abstract: "This UM6SS Quarto thesis template provides a clean, branded starting point for doctoral and master's manuscripts, with a matching slide deck for defenses and progress presentations. It keeps the original thesis structure but replaces the demo content, title page, and placeholders with a university-specific layout that is easier to personalize for a research project at the Université Mohammed VI des Sciences et de la Santé."
+  chapters:
+    - index.qmd
+    - Chapters/Chapter1.qmd
+    - Chapters/Chapter2.qmd
+    - references.qmd
+  appendices:
+    - Appendices/AppendixA.qmd
+
+  search: true
+
+thesis:
+  supervisor: 
+    name: Supervisor Name
+    url: https://um6ss.ma/
+  degree-name: Doctor of Philosophy
+  university: Université Mohammed VI des Sciences et de la Santé
+  department: Department / School
+  group: Research Unit
+  faculty: Faculty / Institute
+  declaration: "Frontmatter/declaration.tex"
+  quotation:
+    text: "Research is the bridge between clinical questions and better care."
+    attribution: UM6SS thesis template
+  acknowledgements: "Frontmatter/acknowledgements.tex"
+  abbreviations: "Frontmatter/abbreviations.tex"
+  symbols: "Frontmatter/symbols.tex"
+  dedication: "Frontmatter/dedication.tex"
+  logo: images/logo.png
+  logo-height: "2cm"
+
+bibliography: [example.bib]
+
+execute:
+  echo: false
+  code-overflow: wrap
+
+# urlcolor changes the url color in the body of the PDF
+# linkcolor changes color of internal links (like to figures)
+# toclinkcolor changes color of toc, lof and lot links
+format:
+  quarto-thesis-pdf: 
+    urlcolor: UM6SSRed
+    linkcolor: UM6SSDarkRed
+    toclinkcolor: black
+    toc-depth: 2

@@ -1,0 +1,415 @@
+---
+title: "Building Slides with Quarto"
+subtitle: "A hands-on teaching session"
+author: "Your Name"
+institute: "Université Mohammed VI des Sciences et de la Santé"
+date: last-modified
+format:
+  beamer:
+    theme: default
+    colortheme: default
+    aspectratio: 169
+    navigation: horizontal
+    include-in-header: slides-in-header.tex
+execute:
+  echo: false
+bibliography: example.bib
+---
+
+## Welcome
+
+This session teaches how to build a slide deck with Quarto, one concept
+per slide. Every feature shown is demonstrated live: run
+`quarto render quarto-slides-course.qmd` and follow along in the source.
+
+## Session outline
+
+1. Getting started
+2. Text and structure
+3. Images and figures
+4. Code and its output
+5. Tables
+6. Layout and emphasis
+7. Citations and cross-references
+8. Rendering and publishing
+9. Using this for your own defense
+
+# Getting started
+
+## What is Quarto
+
+- An open-source publishing system built on Pandoc.
+- One plain-text `.qmd` file compiles to slides, articles, books, or
+  websites.
+- Combines Markdown, executable code (R, Python, Julia, Observable), and a
+  YAML header that configures the whole document.
+
+## Quarto slide formats
+
+Quarto's `format:` key decides what a `.qmd` renders to. For slides, the
+three options are:
+
+- **revealjs**: HTML slides, run in any browser, easy to embed video/JS.
+- **beamer**: LaTeX/PDF slides (used by this course and the thesis
+  defense deck), best when you need print-quality PDF output.
+- **pptx**: editable PowerPoint, useful when collaborators need to edit
+  slides without Quarto installed.
+
+## Anatomy of a `.qmd` file
+
+Three parts, always in this order:
+
+1. A YAML header between `---` fences: title, author, format, execution
+   options.
+2. Markdown content, with `##` (level-2 heading) starting a new slide.
+3. Optional executable code chunks, fenced with triple backticks.
+
+## The YAML header
+
+```markdown
+---
+title: "My Talk"
+author: "Your Name"
+format: beamer
+---
+```
+
+- `title` / `subtitle` / `author` / `date` populate the title slide.
+- `format` chooses the output type (`beamer`, `revealjs`, `pptx`, ...).
+- Format-specific options nest under the format name, e.g.
+  `format: {beamer: {aspectratio: 169}}`.
+
+## Slides are just level-2 headings
+
+```markdown
+## First slide
+
+Content here.
+
+## Second slide
+
+More content.
+```
+
+Every `##` starts a new slide automatically; no explicit slide separators
+needed.
+
+# Text and structure
+
+## Headings inside a slide
+
+A level-2 heading (`##`) makes a new slide; level-3 (`###`) and below
+create subheadings *within* the current slide, useful for grouping
+content without splitting it across slides.
+
+## Lists and emphasis
+
+Standard Markdown works as expected:
+
+- `**bold**`, `*italic*`, `` `code` ``
+- `-` for bullets, `1.` for numbered lists
+- Nested lists by indenting two spaces
+
+1. First step
+2. Second step
+   - a sub-point
+   - another sub-point
+
+## Speaker notes
+
+Wrap presenter-only text in a `{.notes}` div. It compiles to `\note{...}`
+in beamer and to hidden speaker notes in revealjs: visible to the
+presenter, not the audience:
+
+```markdown
+::: {.notes}
+Remind the audience why this matters before moving on.
+:::
+```
+
+::: {.notes}
+This is an actual speaker note attached to this slide.
+:::
+
+# Images and figures
+
+## Insert a static image
+
+Plain Markdown image syntax works in every Quarto format, with an
+optional caption and size attribute:
+
+```markdown
+![UM6SS logo](images/logo.png){width="30%"}
+```
+
+![UM6SS logo](images/logo.png){width="30%" fig-align="center"}
+
+## Insert a figure from code
+
+A labeled, captioned code chunk produces a numbered, cross-referenceable
+figure instead of a static file:
+
+```{{r}}
+#| label: fig-example
+#| fig-cap: "Caption used for cross-references"
+plot(1:10)
+```
+
+```{r}
+#| label: fig-example
+#| fig-cap: "Caption used for cross-references"
+plot(1:10)
+```
+
+## Resize figures at render time
+
+`fig-width` / `fig-height` (in inches) control the plotting device
+*before* the image is generated: this changes proportions and text size,
+not just the final display size:
+
+```{r}
+#| label: fig-resized
+#| fig-cap: "Generated at a smaller device size."
+#| fig-width: 4
+#| fig-height: 2.6
+plot(1:10, type = "l")
+```
+
+## Resize the displayed output
+
+`out-width` scales the *already generated* image inside the document,
+without changing the plotting device: the same plot as before, just
+displayed smaller:
+
+```{r}
+#| label: fig-outwidth
+#| fig-cap: "Same plot, displayed smaller via out-width."
+#| fig-width: 4
+#| fig-height: 2.6
+#| out-width: "35%"
+plot(1:10, type = "l")
+```
+
+# Code and its output
+
+## Display code, not just output
+
+`echo: true` shows the chunk source above its result: essential when
+teaching, usually turned off for results-only slides:
+
+```{{r}}
+#| echo: true
+head(mtcars, 3)
+```
+
+```{r}
+#| echo: true
+head(mtcars, 3)
+```
+
+## Controlling what a chunk shows
+
+Common chunk options, set per-chunk with `#| option: value`:
+
+- `echo`: show/hide the source code.
+- `eval`: run/skip the code entirely.
+- `warning` / `message`: hide noisy console output.
+- `include`: run the code but show nothing (useful for `source()` calls).
+
+```{r}
+#| label: setup-quiet
+#| include: false
+set.seed(1)
+```
+
+## Sourcing shared code
+
+A `source()` call with `include: false` loads reusable functions without
+printing anything, exactly how this course's companion thesis defense
+deck reuses `R/shared-results.R` so the manuscript and the slides never
+show different numbers.
+
+```{{r}}
+#| include: false
+source("R/shared-results.R")
+```
+
+# Tables
+
+## Tables from code
+
+`knitr::kable()` turns any data frame into a formatted table, labeled the
+same way as a figure:
+
+```{r}
+#| label: tbl-example
+#| tbl-cap: "A simple summary table."
+knitr::kable(head(mtcars[, 1:4], 3))
+```
+
+## Markdown tables
+
+For small, static tables, plain Markdown pipe syntax is often faster than
+writing code:
+
+```markdown
+| Item          | Status      |
+|---------------|-------------|
+| Data          | Complete    |
+| Analysis      | In progress |
+```
+
+| Item          | Status      |
+|---------------|-------------|
+| Data          | Complete    |
+| Analysis      | In progress |
+
+# Layout and emphasis
+
+## Incremental reveals
+
+Wrap a list in `{.incremental}` to step through points one at a time
+instead of showing them all at once:
+
+::: {.incremental}
+- First point appears on click.
+- Then this one.
+- Then this one.
+:::
+
+## Two-column layouts
+
+`columns` / `column` divs place content side by side: a figure next to
+explanatory text is the most common use:
+
+::: {.columns}
+::: {.column width="50%"}
+**Left column**
+
+- Method
+- Sample size
+- Key assumption
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: fig-column-example
+#| fig-cap: "A figure placed beside text."
+plot(1:10, type = "b")
+```
+:::
+:::
+
+## Callout blocks
+
+Callouts (`{.callout-note}`, `-warning`, `-important`, `-tip`) draw the
+eye to a key message. In beamer they render as a colored block:
+
+```markdown
+::: {.callout-important}
+The primary endpoint must be pre-registered before unblinding.
+:::
+```
+
+::: {.callout-important}
+The primary endpoint must be pre-registered before unblinding.
+:::
+
+# Citations and cross-references
+
+## Citations
+
+Citations use `[@key]`, pulling from a `.bib` file declared with
+`bibliography:` in the YAML header: the same syntax and the same file
+work in a Quarto book, article, or slide deck:
+
+A reporting standard such as CONSORT [@Moher2010] or STROBE [@VonElm2007]
+can be cited on a slide exactly as it would be in a manuscript.
+
+## Cross-references
+
+Anything with a `label: fig-...`, `tbl-...`, or `sec-...` can be
+referenced with `@label` instead of a hardcoded number:
+
+- `@fig-example` -> "Figure 1" (auto-numbered, auto-updated).
+- `@tbl-example` -> "Table 1".
+- Works identically across the thesis PDF and the slide deck, so
+  renumbering a figure never breaks a reference.
+
+# Rendering and publishing
+
+## One script, several formats
+
+The same `.qmd` can target a different output by changing only the
+`format:` key; the Markdown body, code chunks, and citations stay
+unchanged:
+
+```yaml
+format: revealjs   # or: beamer, pptx
+```
+
+## Commands you will use constantly
+
+- `quarto render file.qmd`: render once.
+- `quarto preview file.qmd`: live reload while editing.
+- `quarto render file.qmd --to pptx`: try a different format without
+  touching the YAML.
+- `quarto render file.qmd --to beamer -M keep-tex:true`: keep the
+  intermediate `.tex` file, useful for debugging LaTeX errors.
+
+# Using this for your own defense
+
+## Start from `slides.qmd`, not a blank file
+
+This repository already has a working UM6SS-branded deck at `slides.qmd`.
+For your own defense:
+
+1. Copy or edit `slides.qmd` directly; keep the YAML header as-is so the
+   branding and format stay UM6SS-consistent.
+2. Update `title`, `subtitle`, `author`, and `institute` in the header.
+3. Replace the placeholder slides (Overview, Presentation flow, Results)
+   with your own research context, objectives, methods, and results.
+
+## Reuse figures from your thesis chapters
+
+Do not copy-paste a plot from your manuscript into the slide deck. Follow
+the pattern already set up in this repository:
+
+1. Put your analysis code in `R/shared-results.R` as a function.
+2. Call that function from a labeled chunk in your `Chapters/*.qmd` file.
+3. Call the *same* function from a chunk in `slides.qmd`.
+
+The figure and the number on your slide will then always match what is
+printed in the manuscript, even after you rerun the analysis.
+
+## Checklist before presenting
+
+::: {.incremental}
+- Render both documents after any change: `quarto render` and
+  `quarto render slides.qmd`.
+- Confirm the numbers on your results slide match `Chapters/Chapter2.qmd`.
+- Check the title slide: your name, supervisor, and institute are correct.
+- Time yourself; trim slides rather than shrinking font size to fit more
+  content.
+:::
+
+## Recap
+
+::: {.incremental}
+- A `.qmd` file is YAML + Markdown + code chunks.
+- `##` starts a new slide.
+- Figures and tables can come from code or from static files.
+- `fig-width`/`fig-height` change the plot; `out-width` changes the
+  display size.
+- Citations, cross-references, and shared R scripts keep a deck and its
+  companion manuscript consistent.
+:::
+
+## References
+
+::: {#refs}
+:::
+
+## Closing
+
+Thank you. Now build your own deck.

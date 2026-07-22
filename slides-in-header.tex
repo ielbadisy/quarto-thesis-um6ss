@@ -1,0 +1,23 @@
+% UM6SS beamer branding, using the same accent colors as the thesis PDF
+% (see _extensions/quarto-thesis/partials/in-header.tex).
+\usepackage{xcolor}
+\definecolor{UM6SSRed}{HTML}{DA2025}
+\definecolor{UM6SSDarkRed}{HTML}{A41D21}
+\definecolor{UM6SSSoftRed}{HTML}{F7E6E7}
+
+\setbeamercolor{palette primary}{bg=UM6SSRed, fg=white}
+\setbeamercolor{palette secondary}{bg=UM6SSDarkRed, fg=white}
+\setbeamercolor{palette tertiary}{bg=UM6SSDarkRed, fg=white}
+\setbeamercolor{palette quaternary}{bg=UM6SSRed, fg=white}
+\setbeamercolor{structure}{fg=UM6SSRed}
+\setbeamercolor{title}{fg=UM6SSRed}
+\setbeamercolor{frametitle}{bg=UM6SSRed, fg=white}
+\setbeamercolor{block title}{bg=UM6SSSoftRed, fg=UM6SSDarkRed}
+\setbeamercolor{block body}{bg=UM6SSSoftRed!40, fg=black}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\color{UM6SSRed}\textbullet}
+\setbeamertemplate{itemize subitem}{\color{UM6SSDarkRed}\textendash}
+
+% Same school logo as the thesis title page (see thesis.logo in _quarto.yml).
+\titlegraphic{\includegraphics[height=1.1cm]{images/logo.png}}

@@ -1,0 +1,15 @@
+# Appendix A: Supporting material {#sec-appA}
+
+## What belongs here
+
+Use the appendix for material that supports the thesis without interrupting the main narrative:
+
+- Ethics approval letters.
+- Survey instruments or interview guides.
+- Additional tables or figures.
+- Detailed codebooks or variable definitions.
+- Slides or defense material references.
+
+## Template note
+
+If you want a clean thesis PDF, keep the appendix short and move the really bulky material to a repository, internal drive, or supplementary archive when allowed by your supervisor and program.

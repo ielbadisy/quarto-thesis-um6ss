@@ -1,0 +1,66 @@
+---
+title: "UM6SS Thesis Defense"
+subtitle: "A personalized Quarto beamer deck"
+author: "Your Name"
+institute: "Université Mohammed VI des Sciences et de la Santé"
+date: last-modified
+format:
+  beamer:
+    theme: default
+    colortheme: default
+    aspectratio: 169
+    navigation: horizontal
+    include-in-header: slides-in-header.tex
+execute:
+  echo: false
+---
+
+## Overview
+
+Université Mohammed VI des Sciences et de la Santé
+
+Use this deck for a thesis defense, progress update, or internal presentation. It shares its color palette with the thesis PDF (`_extensions/quarto-thesis/partials/in-header.tex`) and its results with `Chapters/Chapter2.qmd`.
+
+## Presentation flow
+
+1. Research context
+2. Objectives
+3. Methods
+4. Results
+5. Discussion and next steps
+
+## Branded template
+
+- A consistent red UM6SS visual identity, matching the thesis PDF.
+- A title slide that carries the same school logo.
+- Simple layouts that work on projectors and laptops.
+
+## Results
+
+The figure and table below come straight from `R/shared-results.R`, the same script used in the "Example results" section of Chapter 2, so the numbers on the slide can never drift from the numbers in the manuscript.
+
+```{r}
+#| label: setup-shared-results
+source("R/shared-results.R")
+```
+
+```{r}
+#| label: fig-slide-results
+#| fig-cap: "Example primary outcome by study group."
+example_plot()
+```
+
+## Results table
+
+```{r}
+#| label: tbl-slide-results
+knitr::kable(example_table())
+```
+
+## Closing
+
+Thank you.
+
+<!-- For the full "how to build slides with Quarto" teaching session (one
+concept per slide: images, figures, code, tables, layout, citations,
+rendering), see quarto-slides-course.qmd. -->

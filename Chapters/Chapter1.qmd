@@ -1,0 +1,46 @@
+# Chapter 1: Research framing and institutional context {#sec-Chapter1}
+
+## UM6SS context
+
+The UM6SS thesis template is designed for projects that connect clinical practice, biomedical science, health systems, and public health. The opening chapter should make the institutional setting explicit so the reader immediately understands where the work sits inside the university mission.
+
+Use this chapter to answer three questions:
+
+- What scientific or clinical problem are you addressing?
+- Why is it relevant to UM6SS and your program?
+- What concrete gap does your thesis fill?
+
+## Problem statement
+
+A strong thesis chapter is concise. It should move from the broad health context to the precise research problem without repeating the abstract.
+
+### Suggested structure
+
+1. Start with the disease, population, workflow, or health system issue.
+2. Narrow to the setting at UM6SS, a partner hospital, or a specific cohort.
+3. State the methodological or translational gap.
+4. End with the primary aim and secondary objectives.
+
+## Example content block
+
+The following example can be replaced with your own discipline-specific content:
+
+> This thesis examines a clinically relevant question in the UM6SS environment, combining institutional data, a reproducible analytical workflow, and a publication-ready writing style. The goal is to produce a document that is easy to defend, easy to read, and easy to convert into a defense presentation.
+
+## Writing tips for this chapter
+
+- Keep the introduction specific to your field.
+- Avoid generic filler paragraphs copied from older theses.
+- Mention the university, school, and laboratory only once or twice.
+- Prefer short subsections with direct headings.
+
+## Citing sources
+
+Cite references from `example.bib` with the standard Quarto/pandoc syntax,
+for example when justifying a reporting standard such as CONSORT
+[@Moher2010] for trials or STROBE [@VonElm2007] for observational studies.
+The bibliography is rendered automatically on the References page.
+
+## Link to the rest of the thesis
+
+This chapter should naturally lead to the methodology chapter by motivating the design choices, the population, and the analysis plan that follow.
