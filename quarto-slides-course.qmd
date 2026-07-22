@@ -31,7 +31,8 @@ per slide. Every feature shown is demonstrated live: run
 5. Tables
 6. Layout and emphasis
 7. Citations and cross-references
-8. Using this for your own defense
+8. Math and footnotes
+9. Using this for your own defense
 
 # Getting started
 
@@ -334,6 +335,62 @@ referenced with `@label` instead of a hardcoded number:
 - `@tbl-example` -> "Table 1".
 - Works identically across the thesis PDF and the slide deck, so
   renumbering a figure never breaks a reference.
+
+## The reference list is generated, not typed
+
+No manual "References" slide with a hand-typed list. An empty `#refs` div
+placed anywhere in the file, plus `bibliography: example.bib` in the YAML
+header, is filled in automatically at render time from every `[@key]`
+actually cited in the document:
+
+```markdown
+## References
+
+::: {#refs}
+:::
+```
+
+This deck's own References slide (near the end) was produced exactly
+this way, from the two citations used earlier.
+
+# Math and footnotes
+
+## Mathematical formulas
+
+LaTeX math syntax works directly in Markdown, inline or as a display
+equation, and renders identically in beamer, the thesis PDF, or HTML:
+
+```markdown
+Inline: the estimate is $\hat{\beta}$.
+
+Display equation, with a label for cross-referencing:
+
+$$
+\hat{\theta} = \arg\min_{\theta} \sum_{i=1}^{n} \ell(y_i, f(x_i; \theta))
+$$ {#eq-loss}
+```
+
+Inline: the estimate is $\hat{\beta}$.
+
+$$
+\hat{\theta} = \arg\min_{\theta} \sum_{i=1}^{n} \ell(y_i, f(x_i; \theta))
+$$ {#eq-loss}
+
+Reference it later with `@eq-loss`, same pattern as `@fig-...`/`@tbl-...`.
+
+## Footnotes
+
+Two syntaxes, both supported everywhere Quarto renders to:
+
+```markdown
+A claim needing a citekey-free aside.^[This is an inline footnote.]
+
+Or a referenced footnote[^note-id] defined elsewhere in the file.
+
+[^note-id]: The definition can live anywhere, even at the end of the file.
+```
+
+A claim needing a citekey-free aside.^[This is an inline footnote.]
 
 # Using this for your own defense
 
