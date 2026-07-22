@@ -1,0 +1,33 @@
+---
+title: "My Presentation"
+subtitle: "Quarto slides course, practice deck"
+author: "Your Name"
+date: last-modified
+format:
+  beamer:
+    aspectratio: 169
+execute:
+  echo: false
+---
+
+<!--
+Practice file for the "Building Slides with Quarto" session.
+
+Build this up slide by slide as we go through quarto-slides-course.qmd.
+Render often with:
+
+    quarto render student-starter.qmd
+
+Handy paths already available in this repository, for the exercises:
+  - images/logo.png        (static image insertion)
+  - R/shared-results.R      (source() + a shared figure/table)
+  - example.bib             (citations, e.g. [@Moher2010])
+
+When you get to "Using this for your own defense," you can switch from
+this scratch file to copying slides.qmd instead, which already has the
+UM6SS branding (slides-in-header.tex) wired in.
+-->
+
+## My first slide
+
+Start here.
