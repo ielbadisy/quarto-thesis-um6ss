@@ -1,0 +1,86 @@
+---
+title: "Building Slides with Quarto"
+subtitle: "Teaching session guide (2h30)"
+author: "Your Name"
+date: last-modified
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    geometry:
+      - margin=2cm
+    colorlinks: true
+---
+
+## Before students arrive
+
+- Confirm every machine has Quarto, a LaTeX distribution with `lualatex`
+  (`quarto install tinytex`), and R with `knitr` installed.
+- Have everyone `git pull` (or clone) `quarto-thesis-um6ss` so
+  `student-starter.qmd` and the rest of the repo are current.
+- Your own setup: `quarto-slides-course.qmd` open in an editor (present
+  from / type into this live), its rendered `quarto-slides-course.pdf`
+  open in a viewer, and a second window with the real thesis repo files
+  (`_quarto.yml`, `Chapters/Chapter2.qmd`, `R/shared-results.R`,
+  `slides.qmd`) for the thesis-document segment.
+- Tell everyone to open `student-starter.qmd` in RStudio, not the New
+  Quarto Presentation wizard.
+
+## Timed agenda (150 minutes)
+
+| Time | Block | Slides / activity |
+|---|---|---|
+| 0:00-0:10 | Welcome + Getting started | Welcome, Session outline, What is Quarto, The YAML header, Slides are just level-2 headings. Conceptual only, no typing. |
+| 0:10-0:18 | Text and structure | Headings/lists/emphasis, Speaker notes. Students add a second slide + a `{.notes}` block. |
+| 0:18-0:38 | Images and figures | Insert a static image, Insert a figure from code, Resize at render time (`fig-width`/`fig-height`), Resize displayed output (`out-width`). **Render checkpoint 1.** |
+| 0:38-0:48 | Code and its output | Display code (`echo: true`), Sourcing shared code (`source()` + `include: false`). |
+| 0:48-0:56 | Tables | Tables from code (`knitr::kable()`), Markdown tables. Brisk; recover time here if behind. |
+| 0:56-1:06 | **Break** | |
+| 1:06-1:21 | Layout and emphasis | Incremental reveals, Two-column layouts, Callout blocks. **Render checkpoint 2.** |
+| 1:21-1:29 | Citations and cross-references | `[@key]` citations, `@fig-.../@tbl-.../@eq-...` cross-refs, auto-generated `#refs` reference list. |
+| 1:29-1:37 | Math and footnotes | Inline/display equations with `{#eq-...}`, footnotes. **Render checkpoint 3.** |
+| 1:37-1:57 | The thesis document (live, real repo) | `_quarto.yml` metadata, add/edit a chapter, show `R/shared-results.R` called from `Chapters/Chapter2.qmd`, render to `UM6SS-Thesis-Template.pdf`. |
+| 1:57-2:05 | **Break** | |
+| 2:05-2:25 | Using this for your own defense | Start from `slides.qmd`, reuse figures from thesis chapters, checklist before presenting, References, Closing. |
+| 2:25-2:30 | Wrap-up / questions | |
+
+**If running behind**, cut in this order: Tables -> Callout blocks ->
+Markdown tables. Never cut: the `fig-width`/`out-width` pair, the
+thesis-document segment, or "Using this for your own defense."
+
+\newpage
+
+## Reference: files that parametrize the rendered PDFs
+
+### Thesis PDF (`UM6SS-Thesis-Template.pdf`)
+
+| File | What it controls |
+|---|---|
+| `_quarto.yml` | Title, author, supervisor, degree, university, abstract, chapter order, `quarto-thesis-pdf` format options (`urlcolor`, `linkcolor`, `toclinkcolor`, `toc-depth`), bibliography file |
+| `_extensions/quarto-thesis/_extension.yml` | Defines the `quarto-thesis-pdf` format: which `.cls` to use, classoption, geometry/margins, which partials to inject and where |
+| `_extensions/quarto-thesis/MastersDoctoralThesis.cls` | The LaTeX document class: page layout, chapter/section styling, declaration/abstract/acknowledgements environments |
+| `_extensions/quarto-thesis/partials/in-header.tex` | LaTeX preamble additions: `UM6SSRed`/`UM6SSDarkRed`/`UM6SSSoftRed` colors, name/degree placeholders, `biblatex` setup, PDF metadata |
+| `_extensions/quarto-thesis/partials/before-body.tex` | Everything before Chapter 1: title page, declaration/quotation/abstract/acknowledgements, table of contents + list of figures/tables, abbreviations/symbols/dedication |
+| `_extensions/quarto-thesis/partials/definitions.tex` | Small `include-before-body` snippet (auxiliary macros) |
+| `_extensions/quarto-thesis/partials/title.tex` | Pointer comment only; title logic actually lives in `before-body.tex` |
+| `Frontmatter/*.tex` | Declaration, acknowledgements, abbreviations, symbols, dedication text, referenced by path from the `thesis:` block in `_quarto.yml` |
+| `example.bib` | Bibliography content, resolved via `bibliography:` in `_quarto.yml` |
+
+### Beamer decks (`slides.pdf`, `quarto-slides-course.pdf`)
+
+| File | What it controls |
+|---|---|
+| YAML header inside each `.qmd` | `format: beamer` options: theme, colortheme, aspectratio, navigation, `include-in-header` |
+| `slides-in-header.tex` | Re-defines `UM6SSRed`/`UM6SSDarkRed`/`UM6SSSoftRed` independently, `\setbeamercolor` for palette/structure/title/frametitle, bullet styling, `\titlegraphic{}` (the logo) |
+
+### Shared across both
+
+- `images/logo.png` -- referenced by path from `thesis.logo` in
+  `_quarto.yml` and from `\titlegraphic` in `slides-in-header.tex`.
+- `R/shared-results.R` -- not a rendering-config file, but both the
+  thesis chapter and the slide decks call into it, so its content
+  silently determines what figures/tables appear in both outputs.
+
+**Note**: `UM6SSRed` and its variants are defined twice (once in
+`in-header.tex`, once in `slides-in-header.tex`), not in one shared
+color file. Rebranding requires editing both.
