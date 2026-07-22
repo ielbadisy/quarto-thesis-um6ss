@@ -28,11 +28,10 @@ per slide. Every feature shown is demonstrated live: run
 2. Text and structure
 3. Images and figures
 4. Code and its output
-5. Tables
-6. Layout and emphasis
-7. Citations and cross-references
-8. Rendering and publishing
-9. Using this for your own defense
+5. Layout and emphasis
+6. Citations and cross-references
+7. Rendering and publishing
+8. Using this for your own defense
 
 # Getting started
 
@@ -234,36 +233,6 @@ show different numbers.
 source("R/shared-results.R")
 ```
 
-# Tables
-
-## Tables from code
-
-`knitr::kable()` turns any data frame into a formatted table, labeled the
-same way as a figure:
-
-```{r}
-#| label: tbl-example
-#| tbl-cap: "A simple summary table."
-knitr::kable(head(mtcars[, 1:4], 3))
-```
-
-## Markdown tables
-
-For small, static tables, plain Markdown pipe syntax is often faster than
-writing code:
-
-```markdown
-| Item          | Status      |
-|---------------|-------------|
-| Data          | Complete    |
-| Analysis      | In progress |
-```
-
-| Item          | Status      |
-|---------------|-------------|
-| Data          | Complete    |
-| Analysis      | In progress |
-
 # Layout and emphasis
 
 ## Incremental reveals
@@ -348,15 +317,6 @@ unchanged:
 format: revealjs   # or: beamer, pptx
 ```
 
-## Commands you will use constantly
-
-- `quarto render file.qmd`: render once.
-- `quarto preview file.qmd`: live reload while editing.
-- `quarto render file.qmd --to pptx`: try a different format without
-  touching the YAML.
-- `quarto render file.qmd --to beamer -M keep-tex:true`: keep the
-  intermediate `.tex` file, useful for debugging LaTeX errors.
-
 # Using this for your own defense
 
 ## Start from `slides.qmd`, not a blank file
@@ -398,7 +358,7 @@ printed in the manuscript, even after you rerun the analysis.
 ::: {.incremental}
 - A `.qmd` file is YAML + Markdown + code chunks.
 - `##` starts a new slide.
-- Figures and tables can come from code or from static files.
+- Figures can come from code or from static files.
 - `fig-width`/`fig-height` change the plot; `out-width` changes the
   display size.
 - Citations, cross-references, and shared R scripts keep a deck and its
