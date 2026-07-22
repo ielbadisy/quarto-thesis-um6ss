@@ -38,31 +38,13 @@ per slide. Every feature shown is demonstrated live: run
 
 ## What is Quarto
 
-- An open-source publishing system built on Pandoc.
-- One plain-text `.qmd` file compiles to slides, articles, books, or
-  websites.
+- An open-source publishing system built on Pandoc: one plain-text `.qmd`
+  file compiles to slides, articles, books, or websites.
 - Combines Markdown, executable code (R, Python, Julia, Observable), and a
   YAML header that configures the whole document.
-
-## Quarto slide formats
-
-Quarto's `format:` key decides what a `.qmd` renders to. For slides, the
-three options are:
-
-- **revealjs**: HTML slides, run in any browser, easy to embed video/JS.
-- **beamer**: LaTeX/PDF slides (used by this course and the thesis
-  defense deck), best when you need print-quality PDF output.
-- **pptx**: editable PowerPoint, useful when collaborators need to edit
-  slides without Quarto installed.
-
-## Anatomy of a `.qmd` file
-
-Three parts, always in this order:
-
-1. A YAML header between `---` fences: title, author, format, execution
-   options.
-2. Markdown content, with `##` (level-2 heading) starting a new slide.
-3. Optional executable code chunks, fenced with triple backticks.
+- The `format:` key decides the output. For slides: **revealjs** (HTML,
+  runs in any browser), **beamer** (LaTeX/PDF, used by this course and
+  the thesis defense deck), or **pptx** (editable PowerPoint).
 
 ## The YAML header
 
@@ -96,15 +78,11 @@ needed.
 
 # Text and structure
 
-## Headings inside a slide
+## Headings, lists, and emphasis
 
 A level-2 heading (`##`) makes a new slide; level-3 (`###`) and below
-create subheadings *within* the current slide, useful for grouping
-content without splitting it across slides.
-
-## Lists and emphasis
-
-Standard Markdown works as expected:
+create subheadings *within* the current slide, for grouping content
+without splitting it across slides. Standard Markdown handles the rest:
 
 - `**bold**`, `*italic*`, `` `code` ``
 - `-` for bullets, `1.` for numbered lists
@@ -194,8 +172,11 @@ plot(1:10, type = "l")
 
 ## Display code, not just output
 
-`echo: true` shows the chunk source above its result: essential when
-teaching, usually turned off for results-only slides:
+`echo: true` shows the chunk source above its result, essential when
+teaching, usually turned off for results-only slides. Other common chunk
+options, set the same way with `#| option: value`: `eval` (run/skip the
+code), `warning`/`message` (hide noisy console output), `include` (run
+the code but show nothing, useful for `source()` calls).
 
 ```{{r}}
 #| echo: true
@@ -205,21 +186,6 @@ head(mtcars, 3)
 ```{r}
 #| echo: true
 head(mtcars, 3)
-```
-
-## Controlling what a chunk shows
-
-Common chunk options, set per-chunk with `#| option: value`:
-
-- `echo`: show/hide the source code.
-- `eval`: run/skip the code entirely.
-- `warning` / `message`: hide noisy console output.
-- `include`: run the code but show nothing (useful for `source()` calls).
-
-```{r}
-#| label: setup-quiet
-#| include: false
-set.seed(1)
 ```
 
 ## Sourcing shared code
@@ -317,24 +283,20 @@ The primary endpoint must be pre-registered before unblinding.
 
 # Citations and cross-references
 
-## Citations
+## Citations and cross-references
 
 Citations use `[@key]`, pulling from a `.bib` file declared with
-`bibliography:` in the YAML header: the same syntax and the same file
-work in a Quarto book, article, or slide deck:
+`bibliography:` in the YAML header. A reporting standard such as CONSORT
+[@Moher2010] or STROBE [@VonElm2007] can be cited on a slide exactly as
+it would be in a manuscript.
 
-A reporting standard such as CONSORT [@Moher2010] or STROBE [@VonElm2007]
-can be cited on a slide exactly as it would be in a manuscript.
-
-## Cross-references
-
-Anything with a `label: fig-...`, `tbl-...`, or `sec-...` can be
-referenced with `@label` instead of a hardcoded number:
+Anything with a `label: fig-...`, `tbl-...`, `sec-...`, or `eq-...` can be
+referenced the same way, with `@label` instead of a hardcoded number:
 
 - `@fig-example` -> "Figure 1" (auto-numbered, auto-updated).
 - `@tbl-example` -> "Table 1".
 - Works identically across the thesis PDF and the slide deck, so
-  renumbering a figure never breaks a reference.
+  renumbering never breaks a reference.
 
 ## The reference list is generated, not typed
 
@@ -428,23 +390,15 @@ printed in the manuscript, even after you rerun the analysis.
   content.
 :::
 
-## Recap
-
-::: {.incremental}
-- A `.qmd` file is YAML + Markdown + code chunks.
-- `##` starts a new slide.
-- Figures and tables can come from code or from static files.
-- `fig-width`/`fig-height` change the plot; `out-width` changes the
-  display size.
-- Citations, cross-references, and shared R scripts keep a deck and its
-  companion manuscript consistent.
-:::
-
 ## References
 
 ::: {#refs}
 :::
 
 ## Closing
+
+A `.qmd` file is YAML, Markdown, and code chunks. `##` starts a new
+slide, figures and tables can come from code or static files, and shared
+R scripts keep a deck and its companion manuscript consistent.
 
 Thank you. Now build your own deck.
