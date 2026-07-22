@@ -35,8 +35,18 @@ Render the "how to build slides with Quarto" teaching deck (produces
 quarto render quarto-slides-course.qmd
 ```
 
-All three commands can be run at any time; add `--to quarto-thesis-pdf` or
-`--to beamer` explicitly if you ever add other output formats.
+All of these commands can be run at any time; add `--to quarto-thesis-pdf`
+or `--to beamer` explicitly if you ever add other output formats.
+
+`quarto render` on its own only builds the book project (`index.qmd` +
+`Chapters/` + `Appendices/`); it does not touch the standalone `.qmd`
+files (`slides.qmd`, `quarto-slides-course.qmd`, `student-starter.qmd`,
+`session-guide.qmd`) since they aren't listed in `book.chapters`. To
+render everything in one go:
+
+```bash
+./render-all.sh
+```
 
 ## Repository layout
 
@@ -59,7 +69,10 @@ All three commands can be run at any time; add `--to quarto-thesis-pdf` or
 │   └── shared-results.R            # Single source of truth for the example figure/table
 ├── slides.qmd                      # Beamer defense deck (sources R/shared-results.R)
 ├── quarto-slides-course.qmd        # Standalone "build slides with Quarto" teaching deck
+├── student-starter.qmd             # Blank beamer deck for students to fill in during the session
+├── session-guide.qmd               # Printable teacher's guide: timed agenda + rendering reference
 ├── slides-in-header.tex            # Beamer color theme matching the thesis PDF (shared by both decks)
+├── render-all.sh                   # Renders the book + every standalone .qmd in one command
 └── _extensions/quarto-thesis/      # The `quarto-thesis-pdf` LaTeX format
     ├── MastersDoctoralThesis.cls
     └── partials/                    # title.tex, before-body.tex, in-header.tex, definitions.tex
